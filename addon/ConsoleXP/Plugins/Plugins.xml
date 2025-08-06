@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="ShadowedUF.lua"/> 
+	<Script file="ElvUI.lua" />
+	<Script file="XPerl.lua" />
+</Ui>
+
+<!-- 
+	These plugins are used to enable the usage of the new action target frame on 
+	some unit frames addons such as ShadowedUnitFrames, ElvUI and XPerl.
+
+	These plugins hook in the inner logic of these addons to implement a new UnitFrame based on their implementation of target frame.
+	Plugins can be created for AddOns that exposes their logic to the global environment. addons that does not do that will need to be
+	modified.
+ -->

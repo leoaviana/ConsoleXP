@@ -1,0 +1,15 @@
+## Interface: 30300
+## Title: ConsoleXP |cff808080by leoaviana
+## Author: leoaviana
+## Notes: Simple addon to help configure ConsoleXP.
+## Version: GIT
+## SavedVariables: ConsoleXPSettings
+
+embeds.xml
+ActionTargetFrame.xml
+
+ConsoleXP.lua
+Crosshair.lua
+ActionTargetFrame.lua
+
+Plugins\Plugins.xml
