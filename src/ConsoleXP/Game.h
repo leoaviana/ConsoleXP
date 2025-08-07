@@ -264,7 +264,7 @@ namespace Game
 
     void RenderTargetMarker(void* unit);
 
-    void LoadBinding(const char* bindingName, const char* bindingHeaderName, const char* bindingHeaderText, const char* luaScript);
+    void LoadBinding(const char* bindingName, const char* bindingText, const char* bindingHeaderName, const char* bindingHeaderText, const char* luaScript);
 
     void CastReticle();
     void ToggleIgnoreFacing(uint32_t ignore);

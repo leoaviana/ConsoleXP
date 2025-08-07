@@ -725,7 +725,7 @@ namespace Game
 
     // finally we call LoadBinding with all our parameters already set.
 
-    void LoadBinding(const char* bindingName, const char* bindingHeaderName, const char* bindingHeaderText, const char* luaScript)
+    void LoadBinding(const char* bindingName, const char* bindingText, const char* bindingHeaderName, const char* bindingHeaderText, const char* luaScript)
     { 
         void* thispointer = *reinterpret_cast<void**>(reinterpret_cast<uint8_t*>(0x00BEADD8) + 0x0);
          
@@ -735,14 +735,22 @@ namespace Game
 
         std::string upperHeaderName(bindingHeaderName);
         std::transform(upperHeaderName.begin(), upperHeaderName.end(), upperHeaderName.begin(), ::toupper);
-        std::string fullBindingName = "BINDING_HEADER_" + upperHeaderName;
+        std::string fullHeaderName = "BINDING_HEADER_" + upperHeaderName;
 
         if(upperHeaderName.length() > 0)
-            EnsureLuaBindingHeader(fullBindingName.c_str(), bindingHeaderText);
+            EnsureLuaBindingHeader(fullHeaderName.c_str(), bindingHeaderText);
+
+
+        std::string upperBindingName(bindingName);
+        std::transform(upperBindingName.begin(), upperBindingName.end(), upperBindingName.begin(), ::toupper);
+        std::string fullBindingName = "BINDING_NAME_" + upperBindingName;
+
+        if (upperBindingName.length() > 0)
+            EnsureLuaBindingHeader(fullBindingName.c_str(), bindingText);
          
         XMLObject node(0, "Bindings");
          
-        node.setValue("name", bindingName);
+        node.setValue("name", upperBindingName.c_str());
         node.setValue("header", upperHeaderName.c_str());
          
         char** scriptLocation = reinterpret_cast<char**>(reinterpret_cast<uint8_t*>(&node) + 0x18);

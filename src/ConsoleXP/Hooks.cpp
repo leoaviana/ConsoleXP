@@ -695,16 +695,16 @@ HRESULT __stdcall detoured_EndScene(IDirect3DDevice9* pDevice)
             // taint issues because some functions like interact or settarget cannot be called from an addOn.
             //
 
-            Game::LoadBinding("Interact", "CONSOLEXP", "ConsoleXP Enhancements", "C_ConsoleXP.InteractNearest()"); //"UnitXP(\"interact\", 1)");
-            Game::LoadBinding("Interact with MouseOver", "", "ConsoleXP Enhancements", "C_ConsoleXP.InteractMouseOver()"); //"UnitXP(\"interact\", 1)");
-            Game::LoadBinding("Target Nearest Enemy", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNearestEnemy()"); //"UnitXP(\"target\", \"nearestEnemy\")");
-            Game::LoadBinding("Target World Boss", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetWorldBoss()"); //"UnitXP(\"target\", \"worldBoss\")");
-            Game::LoadBinding("Target Next Enemy", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNextEnemyInCycle()"); //"UnitXP(\"target\", \"nextEnemyInCycle\")");
-            Game::LoadBinding("Target Previous Enemy", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetPreviousEnemyInCycle()"); //"UnitXP(\"target\", \"previousEnemyInCycle\")");
-            Game::LoadBinding("Target Next Enemy Prioritizing Melee", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNextEnemyConsideringDistance()"); //"UnitXP(\"target\", \"nextEnemyConsideringDistance\")");
-            Game::LoadBinding("Target Previous Enemy Prioritizing Melee", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetPreviousEnemyConsideringDistance()"); //"UnitXP(\"target\", \"previousEnemyConsideringDistance\")");
-            Game::LoadBinding("Next Target Marker", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNextMarkedEnemyInCycle()"); //"UnitXP(\"target\", \"nextMarkedEnemyInCycle\")");
-            Game::LoadBinding("Previous Target Marker", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetPreviousMarkedEnemyInCycle()"); //"UnitXP(\"target\", \"previousMarkedEnemyInCycle\")");
+            Game::LoadBinding("CXPINTERACT", "Interact", "CONSOLEXP", "ConsoleXP Enhancements", "C_ConsoleXP.InteractNearest()"); //"UnitXP(\"interact\", 1)");
+            Game::LoadBinding("CXPMOUSEOVER", "Interact with MouseOver", "", "ConsoleXP Enhancements", "C_ConsoleXP.InteractMouseOver()"); //"UnitXP(\"interact\", 1)");
+            Game::LoadBinding("CXPNEARESTENEMY", "Target Nearest Enemy", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNearestEnemy()"); //"UnitXP(\"target\", \"nearestEnemy\")");
+            Game::LoadBinding("CXPWORLDBOSS", "Target World Boss", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetWorldBoss()"); //"UnitXP(\"target\", \"worldBoss\")");
+            Game::LoadBinding("CXPNEXTENEMY", "Target Next Enemy", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNextEnemyInCycle()"); //"UnitXP(\"target\", \"nextEnemyInCycle\")");
+            Game::LoadBinding("CXPPREVENEMY", "Target Previous Enemy", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetPreviousEnemyInCycle()"); //"UnitXP(\"target\", \"previousEnemyInCycle\")");
+            Game::LoadBinding("CXPNEXTENEMYPRIMELEE", "Target Next Enemy Prioritizing Melee", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNextEnemyConsideringDistance()"); //"UnitXP(\"target\", \"nextEnemyConsideringDistance\")");
+            Game::LoadBinding("CXPPREVENEMYPRIMELEE", "Target Previous Enemy Prioritizing Melee", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetPreviousEnemyConsideringDistance()"); //"UnitXP(\"target\", \"previousEnemyConsideringDistance\")");
+            Game::LoadBinding("CXPNEXTTARGETMARKER", "Next Target Marker", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetNextMarkedEnemyInCycle()"); //"UnitXP(\"target\", \"nextMarkedEnemyInCycle\")");
+            Game::LoadBinding("CXPPREVTARGETMARKER", "Previous Target Marker", "", "ConsoleXP Enhancements", "C_ConsoleXP.TargetPreviousMarkedEnemyInCycle()"); //"UnitXP(\"target\", \"previousMarkedEnemyInCycle\")");
 
             loadedBinds++;
         }
