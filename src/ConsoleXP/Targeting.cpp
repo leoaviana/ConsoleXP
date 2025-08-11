@@ -60,7 +60,7 @@ namespace Targeting
             float distance = distance3D(oPos, pPos);
             if ((distance <= 5.0 && distance < bestDistance) && Game::IsFacingMelee(player, currentObject)) {
                 if (type == ObjectType::UNIT) {
-                    if (!Game::IsUnitInteractable(currentObject) || !Game::IsUnitInLosTo(player, currentObject)) {
+                    if ((!Game::IsUnitInteractable(currentObject) && !Game::IsUnitDead(currentObject)) || !Game::IsUnitInLosTo(player, currentObject)) {
                         currentObject = *reinterpret_cast<uint32_t*>(currentObject + 0x3C);
                         continue;
                     }

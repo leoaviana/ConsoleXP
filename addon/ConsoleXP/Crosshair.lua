@@ -43,7 +43,6 @@ Crosshair:SetScript("OnUpdate", function(self, elapsed)
     end
 end)
 
--- Popup dialog definition (register once globally)
 StaticPopupDialogs["CXP_CROSSHAIR_DRAG"] = {
     text = "Drag the crosshair to the desired position.\n\nClose this window to stop dragging.",
     button1 = CANCEL,
@@ -52,15 +51,12 @@ StaticPopupDialogs["CXP_CROSSHAIR_DRAG"] = {
     hideOnEscape = true,
     preferredIndex = 3,
     OnHide = function()
-        -- When popup closes, disable dragging automatically
         DisableCrosshairDrag()
     end,
 }
 
--- Enable Drag Mode
 function addon:EnableCrosshairDrag() 
 
-    -- Close open windows
     if InterfaceOptionsFrame:IsShown() then
         HideUIPanel(InterfaceOptionsFrame)
     end 
@@ -84,7 +80,6 @@ function addon:EnableCrosshairDrag()
     Crosshair:SetScript("OnDragStop", function(self)
         self:StopMovingOrSizing()
 
-        -- Get new position relative to center of UIParent
         local centerX, centerY = UIParent:GetCenter()
         local posX, posY = self:GetCenter()
 
@@ -94,11 +89,9 @@ function addon:EnableCrosshairDrag()
         SetCVar("cxp_virtualMouseX", offsetX)
         SetCVar("cxp_virtualMouseY", offsetY)
 
-        -- Immediately update its position to align with CVar (for safety)
         UpdateCrosshair() 
     end)
 
-    -- Show popup dialog
     StaticPopup_Show("CXP_CROSSHAIR_DRAG")
 end
 

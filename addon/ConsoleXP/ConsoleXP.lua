@@ -55,12 +55,56 @@ local options = {
                     set = function(_, val) SetCVar("cxp_enableActionTarget", val and "1" or "0") end,
                     order = 1,
                 },
+                cxp_enableActionTargetFrame = {
+                    type = "toggle",
+                    name = "Hide Action Target Frame",
+                    get = function() return ConsoleXPSettings.hideActionTargetFrame end,
+                    set = function(_, val) ConsoleXPSettings.hideActionTargetFrame = val end,
+                    order = 1.1,
+                },
+                cxp_enableHighlightAura = {
+                    type = "toggle",
+                    name = "Enable Highlight Aura",
+                    get = function() return GetCVarBoolean("cxp_enableHighlightAura") end,
+                    set = function(_, val) SetCVar("cxp_enableHighlightAura", val and "1" or "0") end,
+                    order = 2,
+                },                
+                cxp_highlightAuraSpellID = {
+                    type = "input",
+                    name = "Highlight Aura Spell ID",
+                    desc = "Spell ID to use for highlight aura",
+                    get = function() return GetCVar("cxp_highlightAuraSpellID") or "54273" end,
+                    set = function(_, val)
+                        if tonumber(val) then
+                            SetCVar("cxp_highlightAuraSpellID", val)
+                        end
+                    end,
+                    order = 3,
+                    width = sliderWidth,
+                    disabled = function() 
+                        return not GetCVarBoolean("cxp_enableHighlightAura") 
+                    end,
+                },
+                cxp_enableHighlightInteract = {
+                    type = "toggle",
+                    name = "Enable Highlighting Interact Key Target",
+                    get = function() return GetCVarBoolean("cxp_enableHighlightInteract") end,
+                    set = function(_, val) SetCVar("cxp_enableHighlightInteract", val and "1" or "0") end,
+                    order = 4,
+                },
+                cxp_enableHighlightMouseOver = {
+                    type = "toggle",
+                    name = "Enable Highlighting Interact On MouseOver Target",
+                    get = function() return GetCVarBoolean("cxp_enableHighlightMouseOver") end,
+                    set = function(_, val) SetCVar("cxp_enableHighlightMouseOver", val and "1" or "0") end,
+                    order = 5,
+                },                
                 cxp_enableMouselookCrosshair = {
                     type = "toggle",
                     name = "Enable Mouselook Crosshair",
                     get = function() return ConsoleXPSettings.enableCrosshair end,
                     set = function(_, val) ConsoleXPSettings.enableCrosshair = val end,
-                    order = 2,
+                    order = 6,
                 },
                 
                 cxp_alwaysShowMouselookCrosshair = {
@@ -74,7 +118,7 @@ local options = {
                     desc = "Always show crosshair, default behavior is to show only in Mouselook state.",
                     get = function() return ConsoleXPSettings.alwaysShowCrosshair end,
                     set = function(_, val) ConsoleXPSettings.alwaysShowCrosshair = val end,
-                    order = 3,
+                    order = 7,
                 },
                 cxp_setCrosshairPos = {
                     type = "execute",
@@ -85,7 +129,7 @@ local options = {
                     end,
                     name = "Set Crosshair Position",
                     desc = "Changes the crosshair position on screen",
-                    order = 3.1,
+                    order = 7.1,
                     func = function()
                         addon:EnableCrosshairDrag() 
                         end,
@@ -99,48 +143,11 @@ local options = {
                         end
                     end,
                     name = "Reset Crosshair Position",
-                    order = 3.2,
+                    order = 7.2,
                     func = function()
                             SetCVar("cxp_virtualMouseX", 0)
                             SetCVar("cxp_virtualMouseY", 0)
                         end,
-                },
-                cxp_enableHighlightAura = {
-                    type = "toggle",
-                    name = "Enable Highlight Aura",
-                    get = function() return GetCVarBoolean("cxp_enableHighlightAura") end,
-                    set = function(_, val) SetCVar("cxp_enableHighlightAura", val and "1" or "0") end,
-                    order = 4,
-                },
-                cxp_enableHighlightInteract = {
-                    type = "toggle",
-                    name = "Enable Highlighting Interact Key Target",
-                    get = function() return GetCVarBoolean("cxp_enableHighlightInteract") end,
-                    set = function(_, val) SetCVar("cxp_enableHighlightInteract", val and "1" or "0") end,
-                    order = 5,
-                },
-                cxp_enableHighlightMouseOver = {
-                    type = "toggle",
-                    name = "Enable Highlighting Interact On MouseOver Target",
-                    get = function() return GetCVarBoolean("cxp_enableHighlightMouseOver") end,
-                    set = function(_, val) SetCVar("cxp_enableHighlightMouseOver", val and "1" or "0") end,
-                    order = 6,
-                },
-                cxp_highlightAuraSpellID = {
-                    type = "input",
-                    name = "Highlight Aura Spell ID",
-                    desc = "Spell ID to use for highlight aura",
-                    get = function() return GetCVar("cxp_highlightAuraSpellID") or "54273" end,
-                    set = function(_, val)
-                        if tonumber(val) then
-                            SetCVar("cxp_highlightAuraSpellID", val)
-                        end
-                    end,
-                    order = 7,
-                    width = sliderWidth,
-                    disabled = function() 
-                        return not GetCVarBoolean("cxp_enableHighlightAura") 
-                    end,
                 },
             },
         },

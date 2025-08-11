@@ -40,8 +40,6 @@ uint32_t Interact::InteractMouseOver()
         float baseScale = *(float*)(bestTarget + 0x98);
         float trueScale = descriptorScale * baseScale;
 
-        //printf("Object: %x | Radius: %.2f | Height: %.2f | Scale: %.2f\n", bestTarget, radius, height, trueScale);
-
         if (type == ObjectType::UNIT)
             Game::SetTargetInteract(bestTarget, guid);
         else

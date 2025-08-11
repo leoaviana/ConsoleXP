@@ -186,15 +186,13 @@ void __cdecl hkTarget(guid_t guid)
 }
 
 typedef uint32_t(__thiscall* OnAttackIconPressed_t)(void* thisPtr, guid_t guid, uint32_t p3);
-typedef uint32_t(__fastcall* OnAttackIconPressed_t_Prior)(void* thisPtr, void* unused, guid_t guid, uint32_t p3);
 OnAttackIconPressed_t oOnAttackIconPressed = nullptr; 
-OnAttackIconPressed_t_Prior oOnAttackIconPressed_Prior = nullptr;
 
 uint32_t __fastcall hkOnAttackIconPressed(void* thisPtr, void* /*unused*/, guid_t guid, uint32_t p3)
 {
     guid_t currentTarget = Game::UnitTargetGuid((uint32_t)thisPtr);
 
-    if (isInActionTargetMode)
+    if (Hooks::enableActionTarget && isInActionTargetMode)
     {
         if (currentTarget != Hooks::actionTargetGUID)
         {
@@ -202,19 +200,13 @@ uint32_t __fastcall hkOnAttackIconPressed(void* thisPtr, void* /*unused*/, guid_
         }
 
         uint32_t result;
-        if(oOnAttackIconPressed)
-            result = oOnAttackIconPressed(thisPtr, guid, 0);
-        else
-			result = oOnAttackIconPressed_Prior(thisPtr, nullptr,  guid, p3);
+        result = oOnAttackIconPressed(thisPtr, guid, 0);
 
         isInActionTargetMode = true;  
         return result;
     } 
 
-    if (oOnAttackIconPressed)
-        return oOnAttackIconPressed(thisPtr, guid, 0);
-    else
-        return oOnAttackIconPressed_Prior(thisPtr, nullptr, guid, p3);
+    return oOnAttackIconPressed(thisPtr, guid, 0);
 }
 
 typedef void(__cdecl* CastSpell_t)(int spellID, int itemAddr, guid_t guid, char isTrade);
@@ -271,7 +263,7 @@ void __cdecl hkCastSpell(int spellID, int itemAddr, guid_t targetID, char isTrad
     }
 
 
-    if (isInActionTargetMode && IsHarmfulSpell(localizedRow, spellID) == 1)
+    if ((isInActionTargetMode && IsHarmfulSpell(localizedRow, spellID) == 1) && Hooks::enableActionTarget)
     {
         if (targetID != Hooks::actionTargetGUID)
         {
@@ -415,9 +407,7 @@ void __cdecl Hooked_FUN_007e6390(int param_1) {
 }
 
 typedef int(__thiscall* CGUnitVirtB8Fn)(int* param_1, uint32_t param_2);
-typedef int(__fastcall* PriorHookCGUnitVirtB8Fn)(int* param_1, void* unused, uint32_t param_2);
 CGUnitVirtB8Fn Original_CGUnitVirtB8 = nullptr;
-PriorHookCGUnitVirtB8Fn PriorHook_CGUnitVirtB8 = nullptr;
 
 int __fastcall Hooked_CGUnitVirtB8(int* param_1, void* unused, uint32_t param_2) {
     uint64_t guid = *reinterpret_cast<uint64_t*>(reinterpret_cast<uint8_t*>(param_1) + 0x30);
@@ -428,10 +418,7 @@ int __fastcall Hooked_CGUnitVirtB8(int* param_1, void* unused, uint32_t param_2)
     }
 
     // Call the original function for all other units.
-    if (PriorHook_CGUnitVirtB8)
-        return PriorHook_CGUnitVirtB8(param_1, unused, param_2);
-    else
-        return Original_CGUnitVirtB8(param_1, param_2);
+    return Original_CGUnitVirtB8(param_1, param_2);
 }
 
 /// <summary>

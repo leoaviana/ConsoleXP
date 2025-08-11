@@ -70,6 +70,7 @@ function ActionTargetFrame:New()
     frame:SetFrameLevel(5) 
 
     RegisterStateDriver(frame, "visibility", "[target=actiontarget, exists] show; hide")
+    self.registered = true
 
     TargetFrame_OnLoad(frame, "actiontarget")
 
@@ -128,6 +129,13 @@ function ActionTargetFrame:OnEvent(event, ...)
     if event == "PLAYER_ACTIONTARGET_CHANGED" then
         local actionTargetGUID = UnitGUID("actiontarget")
         local targetGUID = UnitGUID("target")
+
+        
+    if(ConsoleXPSettings.hideActionTargetFrame) then  
+        self:SetAlpha(0)
+    else
+        self:SetAlpha(1)
+    end
 
         self:Update()
         TargetFrame_UpdateRaidTargetIcon(self)  
